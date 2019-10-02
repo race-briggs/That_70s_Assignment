@@ -1,23 +1,29 @@
 var axios = require('axios');
 var fs = require('fs');
-var showData = [
-    "Title: " + response.data[0].show.name,
-    "Genres: " + response.data[0].show.genres,
-    "Rating: " + response.data[0].show.rating.average,
-    "Network: " + response.data[0].show.network.name,
-    "Summary: " + response.data[0].show.summary,
-]
+
 
 function searchApi(query){
   switch(query){
     case 'tv':
             axios.get('http://api.tvmaze.com/search/shows?q=' + process.argv.slice(3).join("%"))
             .then(function(response){
-                console.log("Title: " + response.data[0].show.name);
-                console.log("Genres: " + response.data[0].show.genres);
-                console.log("Rating: " + response.data[0].show.rating.average);
-                console.log("Network: " + response.data[0].show.network.name);
-                console.log("Summary: " + response.data[0].show.summary);
+                // console.log("Title: " + response.data[0].show.name);
+                // console.log("Genres: " + response.data[0].show.genres);
+                // console.log("Rating: " + response.data[0].show.rating.average);
+                // console.log("Network: " + response.data[0].show.network.name);
+                // console.log("Summary: " + response.data[0].show.summary);     
+                var showData = [`
+
+
+Title: ${response.data[0].show.name}
+Genres: ${response.data[0].show.genres}
+Rating: ${response.data[0].show.rating.average}
+Network: ${response.data[0].show.network.name}
+Summary: ${response.data[0].show.summary}
+
+
+                `]; 
+
                 fs.appendFile("log.txt", showData, function (err) {
                     if (err) {
                         console.log(err);
@@ -27,6 +33,7 @@ function searchApi(query){
                     }
                 });
                 
+                console.log(showData);
 
             })
 
@@ -43,6 +50,7 @@ function searchApi(query){
 }
 
 searchApi(process.argv[2]);
+
 
 
 
