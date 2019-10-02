@@ -2,7 +2,7 @@ var axios = require('axios');
 
 function searchApi(query){
   switch(query){
-    case 'tv':
+    case 'show':
             axios.get('http://api.tvmaze.com/search/shows?q=' + process.argv.slice(3).join("%"))
             .then(function(response){
                 console.log("Title: " + response.data[0].show.name);
