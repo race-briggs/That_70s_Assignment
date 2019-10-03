@@ -1,5 +1,4 @@
 var axios = require('axios');
-
 function searchApi(query){
   switch(query){
     case 'tv':
@@ -25,6 +24,7 @@ function searchApi(query){
         Country: ${response.data[0].person.country.name}
 
         `);
+
     });
 
       break;
